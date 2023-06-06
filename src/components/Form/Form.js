@@ -4,13 +4,11 @@ import PropTypes from 'prop-types';
 import css from './Form.module.css';
 
 class Form extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
       name: '',
       number: '',
     };
-  }
+  
 
   handleChange(event) {
     const { name, value } = event.target;

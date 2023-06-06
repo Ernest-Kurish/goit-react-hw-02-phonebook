@@ -5,13 +5,11 @@ import Filter from './Filter/Filter';
 import ContactList from './Contacts/Contacts';
 
 export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
       contacts: [],
       filter: ''
     };
-  }
+  
 
   addContact = contact => {
     this.setState(prevState => ({
