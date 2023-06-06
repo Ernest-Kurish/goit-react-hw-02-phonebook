@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import css from './ContactList.module.css';
 import ContactListItem from '../ContactListItem/ContactListItem';
 
-function ContactList({ contacts, onDelete }) {
+const ContactList = ({ contacts, onDelete }) => {
   return (
     <ul className={css['contacts__list']}>
       {contacts.map((contact) => (
@@ -15,7 +15,7 @@ function ContactList({ contacts, onDelete }) {
       ))}
     </ul>
   );
-}
+};
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
