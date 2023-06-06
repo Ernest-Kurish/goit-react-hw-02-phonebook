@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Filter.module.css';
+import styles from './SearchFilter.module.css';
 
-function Filter({ value, onChange }) {
+function SearchFilter({ value, onChange }) {
   const handleInputChange = (event) => {
     onChange(event.target.value);
   };
@@ -20,9 +20,9 @@ function Filter({ value, onChange }) {
   );
 }
 
-Filter.propTypes = {
+SearchFilter.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
 };
 
-export default Filter;
+export default SearchFilter;

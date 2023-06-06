@@ -1,53 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import css from './App.module.css';
-import Form from './Form/Form';
-import Filter from './Filter/Filter';
-import ContactList from './Contacts/Contacts';
+import ContactForm from './ContactForm/ContactForm';
+import ContactList from './ContactList/ContactList';
+import SearchFilter from './SearchFilter/SearchFilter';
 
-export class App extends Component {
-  state = {
-      contacts: [],
-      filter: ''
-    };
-  
+function App() {
+  const [contacts, setContacts] = useState([]);
+  const [filter, setFilter] = useState('');
 
-  addContact = contact => {
-    this.setState(prevState => ({
-      contacts: [contact, ...prevState.contacts]
-    }));
+  const addContact = (contact) => {
+    setContacts([contact, ...contacts]);
   };
 
-  filterChange = value => {
-    this.setState({
-      filter: value
-    });
+  const deleteContact = (id) => {
+    setContacts(contacts.filter((contact) => contact.id !== id));
   };
 
-  filterContacts = () => {
-    const { contacts, filter } = this.state;
-    return contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
-    );
+  const handleFilterChange = (value) => {
+    setFilter(value);
   };
 
-  deleteContact = id => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== id)
-    }));
-  };
+  const filteredContacts = contacts.filter(({ name }) =>
+    name.toLowerCase().includes(filter.toLowerCase())
+  );
 
-  render() {
-    const { contacts, filter } = this.state;
-    const filteredContacts = this.filterContacts();
-
-    return (
-      <div className={css.container}>
-        <h1>Phonebook</h1>
-        <Form contacts={contacts} onSubmit={this.addContact} />
-        <h2>Contacts</h2>
-        <Filter value={filter} onChange={this.filterChange} />
-        <ContactList contacts={filteredContacts} onDelete={this.deleteContact} />
-      </div>
-    );
-  }
+  return (
+    <div className={css.container}>
+      <h1>Phonebook</h1>
+      <ContactForm addContact={addContact} />
+      <h2>Contacts</h2>
+      <SearchFilter value={filter} onChange={handleFilterChange} />
+      <ContactList contacts={filteredContacts} onDelete={deleteContact} />
+    </div>
+  );
 }
+
+export default App;
