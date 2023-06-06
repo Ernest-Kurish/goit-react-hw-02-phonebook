@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './SearchFilter.module.css';
 
-function SearchFilter({ value, onChange }) {
+const SearchFilter = ({ value, onChange }) => {
   const handleInputChange = (event) => {
     onChange(event.target.value);
   };
@@ -18,7 +18,7 @@ function SearchFilter({ value, onChange }) {
       />
     </label>
   );
-}
+};
 
 SearchFilter.propTypes = {
   value: PropTypes.string,

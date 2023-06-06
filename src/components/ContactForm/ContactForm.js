@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import css from './ContactForm.module.css';
 
-function ContactForm({ addContact }) {
+const ContactForm = ({ addContact }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -54,10 +54,12 @@ function ContactForm({ addContact }) {
       </button>
     </form>
   );
-}
+};
 
 ContactForm.propTypes = {
   addContact: PropTypes.func.isRequired,
 };
 
 export default ContactForm;
+
+

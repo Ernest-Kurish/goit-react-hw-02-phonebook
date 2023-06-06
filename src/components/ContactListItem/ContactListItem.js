@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import css from './ContactListItem.module.css';
 
-function ContactListItem({ contact, onDelete }) {
+const ContactListItem = ({ contact, onDelete }) => {
   const handleDelete = () => {
     onDelete(contact.id);
   };
@@ -15,7 +15,7 @@ function ContactListItem({ contact, onDelete }) {
       </button>
     </li>
   );
-}
+};
 
 ContactListItem.propTypes = {
   contact: PropTypes.shape({
