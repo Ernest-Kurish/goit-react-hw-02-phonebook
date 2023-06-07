@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import css from './ContactForm.module.css';
 
-const ContactForm = ({ addContact }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+class ContactForm extends React.Component {
+  state = {
+      name: '',
+      number: '',
+    };
+  
 
-  const handleSubmit = (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
+    const { name, number } = this.state;
     if (!name || !number) {
       alert('Please enter a name and number');
       return;
@@ -21,45 +25,57 @@ const ContactForm = ({ addContact }) => {
       number,
     };
 
-    addContact(contact);
+    this.props.addContact(contact);
 
-    setName('');
-    setNumber('');
+    this.setState({
+      name: '',
+      number: '',
+    });
   };
 
-  return (
-    <form onSubmit={handleSubmit} className={css.form}>
-      <label>
-        Name
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </label>
+  handleNameChange = (event) => {
+    this.setState({ name: event.target.value });
+  };
 
-      <label>
-        Phone number
-        <input
-          type="tel"
-          value={number}
-          onChange={(e) => setNumber(e.target.value)}
-          required
-        />
-      </label>
+  handleNumberChange = (event) => {
+    this.setState({ number: event.target.value });
+  };
 
-      <button type="submit" className={css['form__btn']}>
-        Add contact
-      </button>
-    </form>
-  );
-};
+  render() {
+    const { name, number } = this.state;
+
+    return (
+      <form onSubmit={this.handleSubmit} className={css.form}>
+        <label>
+          Name
+          <input
+            type="text"
+            value={name}
+            onChange={this.handleNameChange}
+            required
+          />
+        </label>
+
+        <label>
+          Phone number
+          <input
+            type="tel"
+            value={number}
+            onChange={this.handleNumberChange}
+            required
+          />
+        </label>
+
+        <button type="submit" className={css['form__btn']}>
+          Add contact
+        </button>
+      </form>
+    );
+  }
+}
 
 ContactForm.propTypes = {
   addContact: PropTypes.func.isRequired,
 };
 
 export default ContactForm;
-
-
